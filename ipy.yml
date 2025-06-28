@@ -1,0 +1,42 @@
+dependencies:
+- group: test
+  is_dev: true
+  name: pytest
+  version: latest
+- group: lint
+  is_dev: true
+  name: ty
+  version: latest
+- group: lint
+  is_dev: true
+  name: ruff
+  version: latest
+- group: test
+  is_dev: true
+  name: expects
+  version: latest
+general:
+  author: dimanu-py
+  dependency_manager: uv
+  description: Backend application to logger and monitor command usage of instant-python
+    Python library
+  license: MIT
+  python_version: '3.13'
+  slug: instant-python-monitoring
+  source_name: src
+  version: 0.1.0
+  year: 2025
+git:
+  email: dimanu.py@gmail.com
+  initialize: true
+  username: dimanu-py
+template:
+  aggregate_name: null
+  bounded_context: null
+  built_in_features:
+  - github_actions
+  - makefile
+  - logger
+  - fastapi_application
+  name: clean_architecture
+  specify_bounded_context: false
