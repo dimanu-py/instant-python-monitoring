@@ -1,9 +1,9 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from src.infra.http.http_response import HttpResponse
-from src.infra.http.status_code import StatusCode
-from src.domain.exceptions.domain_error import DomainError
+from src.monitoring.driving.http.http_response import HttpResponse
+from src.monitoring.driving.http.status_code import StatusCode
+from src.monitoring.domain_error import DomainError
 
 app = FastAPI()
 

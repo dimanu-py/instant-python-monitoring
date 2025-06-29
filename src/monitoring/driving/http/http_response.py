@@ -1,8 +1,8 @@
 from fastapi.responses import JSONResponse
 
-from src.domain.exceptions.domain_error import DomainError
-from src.infra.http.status_code import StatusCode
-from src.infra.logger.logger import create_logger
+from src.monitoring.domain_error import DomainError
+from src.monitoring.driving.http.status_code import StatusCode
+from src.monitoring.driving.logger.logger import create_logger
 
 logger = create_logger("logger")
 

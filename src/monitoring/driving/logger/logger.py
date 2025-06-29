@@ -3,7 +3,7 @@ from datetime import date
 from logging.handlers import TimedRotatingFileHandler
 from pathlib import Path
 
-from src.infra.logger.json_formatter import JSONFormatter
+from src.monitoring.driving.logger.json_formatter import JSONFormatter
 
 
 def create_file_handler(file_name: str, level: int) -> TimedRotatingFileHandler:
