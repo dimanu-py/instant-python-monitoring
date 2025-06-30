@@ -1,47 +1,33 @@
-from fastapi.responses import JSONResponse
-
-from src.monitoring.domain_error import DomainError
-from src.monitoring.driving.http.status_code import StatusCode
-from src.monitoring.driving.logger.logger import create_logger
-
-logger = create_logger("logger")
+from pydantic import BaseModel, Field
+from fastapi import status
 
 
-class HttpResponse:
-    @staticmethod
-    def domain_error(error: DomainError, status_code: StatusCode) -> JSONResponse:
-        logger.error(
-            "error - domain error",
-            extra={
-                "extra": {"error": error.to_primitives(), "status_code": status_code}
-            },
-        )
-        return JSONResponse(
-            content={"error": error.to_primitives()}, status_code=status_code
-        )
+class HttpResponse(BaseModel):
+    message: str
+    status_code: int
 
-    @staticmethod
-    def internal_error(error: Exception) -> JSONResponse:
-        logger.error(
-            "error - internal server error",
-            extra={
-                "extra": {"error": str(error)},
-                "status_code": StatusCode.INTERNAL_SERVER_ERROR,
-            },
-        )
-        return JSONResponse(
-            content={"error": "Internal server error"},
-            status_code=StatusCode.INTERNAL_SERVER_ERROR,
-        )
 
-    @staticmethod
-    def created(resource: str) -> JSONResponse:
-        logger.info(
-            f"resource - {resource}",
-            extra={"extra": {"status_code": StatusCode.CREATED}},
-        )
-        return JSONResponse(content={}, status_code=StatusCode.CREATED)
+class Successful(HttpResponse):
+    content: dict
+    message: str = Field(init=False, default="Operation successful.")
+    status_code: int = Field(init=False, default=status.HTTP_200_OK)
 
-    @staticmethod
-    def ok(content: dict) -> JSONResponse:
-        return JSONResponse(content=content, status_code=StatusCode.OK)
+
+class NotFound(HttpResponse):
+    message: str
+    status_code: int = Field(init=False, default=status.HTTP_404_NOT_FOUND)
+
+
+class UnprocessableEntity(HttpResponse):
+    message: str
+    status_code: int = Field(init=False, default=status.HTTP_422_UNPROCESSABLE_ENTITY)
+
+
+class TooManyRequests(HttpResponse):
+    message: str
+    status_code: int = Field(init=False, default=status.HTTP_429_TOO_MANY_REQUESTS)
+
+
+class InternalServerError(HttpResponse):
+    message: str = Field(init=False, default="Internal server error.")
+    status_code: int = Field(init=False, default=status.HTTP_500_INTERNAL_SERVER_ERROR)
