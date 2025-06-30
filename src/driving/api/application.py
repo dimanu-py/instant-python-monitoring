@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 
 from src.monitoring.domain_error import DomainError
-from src.monitoring.driving.http.http_response import (
+from src.monitoring.driving.http.responses import (
     InternalServerError,
     HttpResponse,
     UnprocessableEntity,
