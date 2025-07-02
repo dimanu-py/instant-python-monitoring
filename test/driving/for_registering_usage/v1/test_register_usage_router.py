@@ -1,4 +1,5 @@
 import pytest
+from expects import expect, be
 from fastapi.testclient import TestClient
 
 from src.driving.application import app
@@ -26,10 +27,14 @@ class TestRegisterUsageRouter:
             "/app/v1/monitoring/usage", body=request_body
         )
 
-        self._then_response_should_be_successful()
+        self._then_response_should_be_no_content()
 
     def _when_a_post_request_is_made_to(
         self, endpoint: str, body: dict
     ) -> HttpResponse:
         with self._client as client:
             return client.post(endpoint, json=body)  # type: ignore
+
+    def _then_response_should_be_no_content(self) -> None:
+        expect(self._response.status_code).to(be(204))
+        expect(self._response.content).to(be(None))
