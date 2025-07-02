@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request
 
+from src.driving.v1 import routes as v1
 from src.monitoring.domain_error import DomainError
 from src.monitoring.driving.http.responses import (
     InternalServerError,
@@ -8,6 +9,7 @@ from src.monitoring.driving.http.responses import (
 )
 
 app = FastAPI()
+app.include_router(v1.router)
 
 
 @app.exception_handler(Exception)
