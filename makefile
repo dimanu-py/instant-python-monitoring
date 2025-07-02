@@ -50,7 +50,7 @@ remove-dep:  ## Remove a dependency.
 
 .PHONY: check-typing
 check-typing:  ## Run mypy type checking.
-	@uv run ty check
+	@uv run mypy
 
 .PHONY: check-lint
 check-lint:  ## Run ruff linting check.
