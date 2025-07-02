@@ -10,15 +10,15 @@ test:  ## Run all test.
 	@uv run pytest test -ra
 
 .PHONY: unit
-all-unit:  ## Run all unit test.
+unit:  ## Run all unit test.
 	@uv run pytest -m "unit" -ra
 
 .PHONY: integration
-all-integration:  ## Run all integration test.
+integration:  ## Run all integration test.
 	@uv run pytest -m "integration" -ra
 
 .PHONY: acceptance
-all-acceptance:  ## Run all acceptance test.
+acceptance:  ## Run all acceptance test.
 	@uv run pytest -m "acceptance" -ra
 
 .PHONY: coverage
@@ -69,10 +69,10 @@ format:  ## Apply ruff format fix.
 	@uvx ruff format src test
 
 .PHONY: pre-commit
-pre-commit: check-typing check-lint check-format all-unit ## Run pre-commit checks.
+pre-commit: check-typing check-lint check-format ## Run pre-commit checks.
 
 .PHONY: pre-push
-pre-push:  all-integration all-acceptance ## Run pre-push checks.
+pre-push:  unit ## Run pre-push checks.
 
 .PHONY: watch
 watch:  ## Run all test with every change.
