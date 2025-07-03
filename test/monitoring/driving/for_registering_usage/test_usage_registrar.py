@@ -2,10 +2,8 @@ import pytest
 from doublex import Spy, assert_that, called
 
 from src.monitoring.driven.for_sending_usage.for_sending_usage import ForSendingUsage
-from src.monitoring.driving.for_registering_usage.register_usage_command import (
-    RegisterUsageCommand,
-)
 from src.monitoring.driving.for_registering_usage.usage_registrar import UsageRegistrar
+from test.monitoring.driving.for_registering_usage.register_usage_command_mother import RegisterUsageCommandMother
 
 
 @pytest.mark.unit
@@ -15,15 +13,7 @@ class TestUsageRegistrar:
         self._usage_registrar = UsageRegistrar(for_sending_usage=self._sender)  # type: ignore
 
     def test_should_register_command_usage(self) -> None:
-        command = RegisterUsageCommand(
-            command="init",
-            version="0.8.0",
-            platform="linux",
-            template_data={
-                "name": "standard_project",
-                "built_in_features": ["logger", "makefile"],
-            },
-        )
+        command = RegisterUsageCommandMother.any()
 
         self._usage_registrar.execute(command)
 
