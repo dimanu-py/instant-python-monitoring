@@ -23,11 +23,11 @@ class UsageInformation:
             platform=self._platform.value,
             template_data=self._template_data.value,
         )
-    
+
     @property
     def command(self) -> Command:
         return self._command
-    
+
     @property
     def version(self) -> Version:
         return self._version

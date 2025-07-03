@@ -15,5 +15,5 @@ class Version(StringValueObject):
         self._ensure_version_format()
 
     def _ensure_version_format(self) -> None:
-        if not re.match(r'^\d+\.\d+\.\d+$', self.value):
+        if not re.match(r"^\d+\.\d+\.\d+$", self.value):
             raise InvalidVersionFormat(self._value)

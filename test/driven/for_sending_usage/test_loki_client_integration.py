@@ -10,7 +10,9 @@ from testcontainers.core.waiting_utils import wait_for_logs
 from src.driven.for_sending_usage.loki_client import LokiClient
 from src.monitoring.usage.usage_information import UsageInformation
 from test.driven.for_sending_usage.loki_test_container import LokiTestContainer
-from test.monitoring.usage.usage_information_primitives_mother import UsageInformationPrimitivesMother
+from test.monitoring.usage.usage_information_primitives_mother import (
+    UsageInformationPrimitivesMother,
+)
 
 
 @pytest.fixture(scope="module")

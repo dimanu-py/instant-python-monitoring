@@ -13,7 +13,7 @@ class LokiClient(ForSendingUsage):
 
     def send_information(self, info: UsageInformation) -> None:
         current_time_ns = int(time.time_ns())
-        
+
         payload = {
             "streams": [
                 {
@@ -22,19 +22,19 @@ class LokiClient(ForSendingUsage):
                         "command": info.command.value,
                         "version": info.version.value,
                     },
-                    "values": [
-                        [str(current_time_ns), json.dumps(info.value)]
-                    ]
+                    "values": [[str(current_time_ns), json.dumps(info.value)]],
                 }
             ]
         }
-        
+
         response = requests.post(
             self._push_endpoint,
             json=payload,
-            headers={"Content-Type": "application/json"}
+            headers={"Content-Type": "application/json"},
         )
-        
+
         if response.status_code != 204:
-            error_msg = f"Failed to send data to Loki: {response.status_code} - {response.text}"
+            error_msg = (
+                f"Failed to send data to Loki: {response.status_code} - {response.text}"
+            )
             raise RuntimeError(error_msg)
