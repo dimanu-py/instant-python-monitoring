@@ -1,4 +1,5 @@
 import pytest
+from doublex import Spy
 
 from src.monitoring.driving.for_registering_usage.register_usage_command import RegisterUsageCommand
 from src.monitoring.driving.for_registering_usage.usage_registrar import UsageRegistrar
@@ -17,7 +18,8 @@ class TestUsageRegistrar:
                 "built_in_features": ["logger", "makefile"],
             },
         )
-        usage_registrar = UsageRegistrar()
+        sender = Spy(ForSendingUsage)
+        usage_registrar = UsageRegistrar(for_sending_usage=sender)
 
         usage_registrar.execute(command)
 
