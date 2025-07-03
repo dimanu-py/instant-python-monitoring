@@ -16,10 +16,10 @@ class TestStringValueObject:
         expect(string.value).to(equal(value))
 
     def test_should_raise_error_when_value_is_none(self) -> None:
-        expect(lambda: StringValueObject(None)).to(raise_error(RequiredValue))
+        expect(lambda: StringValueObject(None)).to(raise_error(RequiredValue))  # type: ignore
 
     def test_should_raise_error_when_value_is_not_string(self) -> None:
-        expect(lambda: StringValueObject(123)).to(raise_error(IncorrectValueType))
+        expect(lambda: StringValueObject(123)).to(raise_error(IncorrectValueType))  # type: ignore
 
     def test_should_compare_equal_with_same_value(self) -> None:
         common_value = "test string"

@@ -20,10 +20,10 @@ class TestTemplateData:
         expect(template_data.value).to(equal(template_dict))
 
     def test_should_raise_error_when_value_is_none(self) -> None:
-        expect(lambda: TemplateData(None)).to(raise_error(RequiredValue))
+        expect(lambda: TemplateData(None)).to(raise_error(RequiredValue))  # type: ignore
 
     def test_should_raise_error_when_value_is_not_dict(self) -> None:
-        expect(lambda: TemplateData([])).to(raise_error(IncorrectValueType))
+        expect(lambda: TemplateData([])).to(raise_error(IncorrectValueType))  # type: ignore
 
     def test_should_raise_error_when_missing_required_keys(self) -> None:
         template_missing_key = {"built_in_features": ["feature1"]}
