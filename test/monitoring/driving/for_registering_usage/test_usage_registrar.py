@@ -1,6 +1,7 @@
 import pytest
 
 from src.monitoring.driving.for_registering_usage.register_usage_command import RegisterUsageCommand
+from src.monitoring.driving.for_registering_usage.usage_registrar import UsageRegistrar
 
 
 @pytest.mark.unit
