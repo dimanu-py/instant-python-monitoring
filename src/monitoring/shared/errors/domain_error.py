@@ -4,7 +4,7 @@ from abc import ABC
 class DomainError(Exception, ABC):
     def __init__(self, message: str, error_type: str) -> None:
         self._message = message
-        self._type = error_type
+        self._type = f"validation_error.{error_type}"
         super().__init__(self._message)
 
     @property
