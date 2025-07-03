@@ -1,4 +1,4 @@
-from typing import TypedDict
+from typing import TypedDict, Self
 
 from src.monitoring.usage.command import Command
 from src.monitoring.usage.platform import Platform
@@ -14,6 +14,18 @@ class UsageInformation:
         self._version = Version(version)
         self._platform = Platform(platform)
         self._template_data = TemplateData(template_data)
+
+    @property
+    def value(self) -> "UsageInformationPrimitives":
+        return UsageInformationPrimitives(
+            command=self._command.value,
+            version=self._version.value,
+            platform=self._platform.value,
+            template_data=self._template_data.value,
+        )
+
+    def __eq__(self, other: Self) -> bool:
+        return self.value == other.value
 
 
 class UsageInformationPrimitives(TypedDict):
