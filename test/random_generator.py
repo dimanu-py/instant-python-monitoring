@@ -9,10 +9,6 @@ class RandomGenerator:
         return cls.faker.uuid4()
 
     @classmethod
-    def command_name(cls) -> str:
-        return cls.faker.domain_word()
-        
-    @classmethod
     def version(cls) -> str:
         major = cls.faker.random_int(min=0, max=2)
         minor = cls.faker.random_int(min=0, max=50)
