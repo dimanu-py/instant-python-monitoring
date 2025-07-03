@@ -3,7 +3,7 @@ from fastapi.responses import JSONResponse
 
 from src.driving.api_response import Error, ApiError
 from src.driving.v1 import routes as v1
-from src.monitoring.domain_error import DomainError
+from src.monitoring.shared.errors.domain_error import DomainError
 
 
 app = FastAPI()
