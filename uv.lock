@@ -64,6 +64,16 @@ wheels = [
 ]
 
 [[package]]
+name = "doublex"
+version = "1.9.6.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyhamcrest" },
+    { name = "six" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/fe/3d/0edaecbafa90c19530739467a5dd02c8ebf9968201ab1ff15537ea98422f/doublex-1.9.6.1.tar.gz", hash = "sha256:48fbc633598eb913a6eb0c4694f8c040ba57bae9653d45643a84243e0c9f3268", size = 15734, upload-time = "2023-02-14T10:53:38.989Z" }
+
+[[package]]
 name = "email-validator"
 version = "2.2.0"
 source = { registry = "https://pypi.org/simple" }
@@ -221,6 +231,7 @@ lint = [
     { name = "ruff" },
 ]
 test = [
+    { name = "doublex" },
     { name = "expects" },
     { name = "faker" },
     { name = "pytest" },
@@ -236,6 +247,7 @@ lint = [
     { name = "ruff" },
 ]
 test = [
+    { name = "doublex", specifier = ">=1.9.6.1" },
     { name = "expects", specifier = ">=0.9.0" },
     { name = "faker", specifier = ">=37.4.0" },
     { name = "pytest" },
@@ -412,6 +424,15 @@ wheels = [
 ]
 
 [[package]]
+name = "pyhamcrest"
+version = "2.1.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/16/3f/f286caba4e64391a8dc9200e6de6ce0d07471e3f718248c3276843b7793b/pyhamcrest-2.1.0.tar.gz", hash = "sha256:c6acbec0923d0cb7e72c22af1926f3e7c97b8e8d69fc7498eabacaf7c975bd9c", size = 60538, upload-time = "2023-10-22T15:47:28.255Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/0c/71/1b25d3797a24add00f6f8c1bb0ac03a38616e2ec6606f598c1d50b0b0ffb/pyhamcrest-2.1.0-py3-none-any.whl", hash = "sha256:f6913d2f392e30e0375b3ecbd7aee79e5d1faa25d345c8f4ff597665dcac2587", size = 54555, upload-time = "2023-10-22T15:47:25.08Z" },
+]
+
+[[package]]
 name = "pytest"
 version = "8.4.1"
 source = { registry = "https://pypi.org/simple" }
@@ -533,6 +554,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/58/15/8b3609fd3830ef7b27b655beb4b4e9c62313a4e8da8c676e142cc210d58e/shellingham-1.5.4.tar.gz", hash = "sha256:8dbca0739d487e5bd35ab3ca4b36e11c4078f3a234bfce294b0a0291363404de", size = 10310, upload-time = "2023-10-24T04:13:40.426Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/e0/f9/0595336914c5619e5f28a1fb793285925a8cd4b432c9da0a987836c7f822/shellingham-1.5.4-py2.py3-none-any.whl", hash = "sha256:7ecfff8f2fd72616f7481040475a65b2bf8af90a56c89140852d1120324e8686", size = 9755, upload-time = "2023-10-24T04:13:38.866Z" },
+]
+
+[[package]]
+name = "six"
+version = "1.17.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031, upload-time = "2024-12-04T17:35:28.174Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050, upload-time = "2024-12-04T17:35:26.475Z" },
 ]
 
 [[package]]
