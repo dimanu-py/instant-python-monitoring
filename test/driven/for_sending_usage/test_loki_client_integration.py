@@ -8,7 +8,9 @@ from expects import expect, be, equal
 from testcontainers.core.waiting_utils import wait_for_logs
 
 from src.driven.for_sending_usage.loki_client import LokiClient
+from src.monitoring.usage.usage_information import UsageInformation
 from test.driven.for_sending_usage.loki_test_container import LokiTestContainer
+from test.monitoring.usage.usage_information_primitives_mother import UsageInformationPrimitivesMother
 
 
 @pytest.fixture(scope="module")
@@ -30,20 +32,13 @@ class TestLokiClientIntegration:
         self._client = LokiClient(self._loki_url)
 
     def test_loki_client_integration(self) -> None:
-        info = {
-            "command": "init",
-            "version": "0.7.1",
-            "platform": "linux",
-            "template_data": {
-                "name": "integration_test",
-                "built_in_features": ["logger", "makefile"],
-            },
-        }
+        info_primitives = UsageInformationPrimitivesMother.any()
+        info = UsageInformation(**info_primitives)
 
         self._client.send_information(info)
 
         registered_information = self._wait_for_saved_data()
-        expect(registered_information).to(equal(info))
+        expect(registered_information).to(equal(info_primitives))
 
     def _wait_for_saved_data(self) -> dict:
         time.sleep(2)  # Wait for Loki to ingest
