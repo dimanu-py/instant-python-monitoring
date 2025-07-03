@@ -1,8 +1,10 @@
+import json
 import time
 from collections.abc import Generator
 
 import pytest
 import requests
+from expects import expect, be, equal
 from testcontainers.core.waiting_utils import wait_for_logs
 
 from src.driven.for_sending_usage.loki_client import LokiClient
@@ -39,11 +41,19 @@ class TestLokiClientIntegration:
         }
 
         self._client.send_information(info)
-        time.sleep(2) 
+        time.sleep(2)  # Wait for Loki to ingest
 
-        query = '{job="instant-python-monitoring"}'
-        resp = requests.get(f"{self._loki_url}/loki/api/v1/query", params={"query": query})
-        assert resp.status_code == 200
-        data = resp.json()
-        found = any("integration_test" in str(stream) for stream in str(data))
-        assert found, f"Expected to find 'integration_test' in the Loki response: {data}"
+        query = '{job="command-usage"}'
+        current_time = int(time.time())
+        query_params = {
+            "query": query,
+            "start": current_time - 60,  # 60 seconds ago
+            "end": current_time,        # now
+            "limit": 100
+        }
+        registered_information_response = requests.get(f"{self._loki_url}/loki/api/v1/query_range", params=query_params)
+        expect(registered_information_response.status_code).to(be(200))
+        data = registered_information_response.json()
+        registered_information_values = json.loads(data["data"]["result"][0]["values"][0][1])
+        expect(registered_information_values).to(equal(info))
+
