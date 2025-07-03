@@ -1,16 +1,16 @@
 import pytest
 from expects import expect, be
 from fastapi.testclient import TestClient
+from fastapi.responses import JSONResponse
 
 from src.driving.application import app
-from src.monitoring.driving.http.http_response import HttpResponse
 
 
 @pytest.mark.acceptance
 class TestRegisterUsageRouter:
     def setup_method(self) -> None:
         self._client = TestClient(app)
-        self._response = HttpResponse(message="Default response", status_code=200)
+        self._response = None
 
     def test_should_register_usage_of_instant_python_command(self) -> None:
         request_body = {
@@ -31,7 +31,7 @@ class TestRegisterUsageRouter:
 
     def _when_a_post_request_is_made_to(
         self, endpoint: str, body: dict
-    ) -> HttpResponse:
+    ) -> JSONResponse:
         with self._client as client:
             return client.post(endpoint, json=body)  # type: ignore
 
