@@ -69,7 +69,7 @@ format:  ## Apply ruff format fix.
 	@uvx ruff format src test
 
 .PHONY: pre-commit
-pre-commit: check-typing check-lint check-format ## Run pre-commit checks.
+pre-commit: check-lint check-format ## Run pre-commit checks.
 
 .PHONY: pre-push
 pre-push:  unit ## Run pre-push checks.

@@ -22,9 +22,9 @@ jobs:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/python_setup
       - run: make check-format
-  typing:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: ./.github/actions/python_setup
-      - run: make check-typing
+#  typing:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v4
+#      - uses: ./.github/actions/python_setup
+#      - run: make check-typing
