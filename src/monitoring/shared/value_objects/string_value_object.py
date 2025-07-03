@@ -11,7 +11,13 @@ class StringValueObject(ValueObject[str]):
 
     @override
     def _validate(self) -> None:
-        if self._value is None:
-            raise RequiredValue()
+        self._ensure_has_value()
+        self._ensure_is_string()
+
+    def _ensure_is_string(self) -> None:
         if not isinstance(self._value, str):
             raise IncorrectValueType(value=self._value)
+
+    def _ensure_has_value(self) -> None:
+        if self._value is None:
+            raise RequiredValue()
