@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request, status
 from fastapi.responses import JSONResponse
 
-from src.driving.http.api_response import Error, ApiError
+from src.driving.api_response import Error, ApiError
 from src.driving.v1 import routes as v1
 from src.monitoring.domain_error import DomainError
 
