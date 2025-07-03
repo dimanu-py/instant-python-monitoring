@@ -41,19 +41,25 @@ class TestLokiClientIntegration:
         }
 
         self._client.send_information(info)
+
+        registered_information = self._wait_for_saved_data()
+        expect(registered_information).to(equal(info))
+
+    def _wait_for_saved_data(self) -> dict:
         time.sleep(2)  # Wait for Loki to ingest
-
-        query = '{job="command-usage"}'
         current_time = int(time.time())
-        query_params = {
-            "query": query,
-            "start": current_time - 60,  # 60 seconds ago
-            "end": current_time,        # now
-            "limit": 100
-        }
-        registered_information_response = requests.get(f"{self._loki_url}/loki/api/v1/query_range", params=query_params)
-        expect(registered_information_response.status_code).to(be(200))
-        data = registered_information_response.json()
-        registered_information_values = json.loads(data["data"]["result"][0]["values"][0][1])
-        expect(registered_information_values).to(equal(info))
+        registered_information_response = requests.get(
+            f"{self._loki_url}/loki/api/v1/query_range",
+            params={
+                "query": '{job="command-usage"}',
+                "start": current_time - 60,
+                "end": current_time,
+                "limit": 100,
+            },
+        )
 
+        expect(registered_information_response.status_code).to(be(200))
+        registered_information_as_json = registered_information_response.json()
+        return json.loads(
+            registered_information_as_json["data"]["result"][0]["values"][0][1]
+        )
