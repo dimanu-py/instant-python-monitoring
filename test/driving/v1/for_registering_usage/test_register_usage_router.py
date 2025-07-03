@@ -10,7 +10,7 @@ from src.driving.application import app
 class TestRegisterUsageRouter:
     def setup_method(self) -> None:
         self._client = TestClient(app)
-        self._response = None
+        self._response = JSONResponse(content={})
 
     def test_should_register_usage_of_instant_python_command(self) -> None:
         request_body = {
