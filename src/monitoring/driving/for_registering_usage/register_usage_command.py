@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 
 
 @dataclass(frozen=True)
@@ -7,3 +7,6 @@ class RegisterUsageCommand:
     version: str
     platform: str
     template_data: dict
+
+    def to_primitives(self) -> dict:
+        return asdict(self)
