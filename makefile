@@ -19,7 +19,9 @@ integration:  ## Run all integration test.
 
 .PHONY: acceptance
 acceptance:  ## Run all acceptance test.
+	@docker compose up -d loki
 	@uv run pytest -m "acceptance" -ra
+	@docker compose down -v
 
 .PHONY: coverage
 coverage:  ## Run all test with coverage.
