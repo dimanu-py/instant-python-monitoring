@@ -1,9 +1,12 @@
 import pytest
+from dotenv import load_dotenv
 from expects import expect, be
-from fastapi.testclient import TestClient
 from fastapi.responses import JSONResponse
+from fastapi.testclient import TestClient
 
 from src.driving.application import app
+
+load_dotenv()
 
 
 @pytest.mark.acceptance
