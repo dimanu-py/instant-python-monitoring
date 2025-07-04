@@ -1,3 +1,5 @@
+import os
+
 from fastapi import APIRouter, status
 from pydantic import BaseModel
 
@@ -20,5 +22,11 @@ class RegisterUsageRequest(BaseModel):
 @router.post("/usage", status_code=status.HTTP_204_NO_CONTENT)
 def register_usage(request: RegisterUsageRequest) -> None:
     command = RegisterUsageCommand(**request.model_dump())
-    usage_registrar = UsageRegistrar(for_sending_usage=LokiClient())
+    usage_registrar = UsageRegistrar(
+        for_sending_usage=LokiClient(
+            url=os.environ.get("LOKI_URL"),
+            username=os.environ.get("LOKI_USERNAME"),
+            password=os.environ.get("LOKI_PASSWORD"),
+        ),
+    )
     usage_registrar.execute(command)
