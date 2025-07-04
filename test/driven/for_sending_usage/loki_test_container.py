@@ -2,7 +2,7 @@ from testcontainers.core.container import DockerContainer
 
 
 class LokiTestContainer(DockerContainer):
-    _LOKI_IMAGE = "grafana/loki:main-5c02493"
+    _LOKI_IMAGE = "grafana/loki:3.4.4"
     _LOKI_PORT = 3100
 
     def __init__(self) -> None:
