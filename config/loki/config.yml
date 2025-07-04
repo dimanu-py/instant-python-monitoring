@@ -1,0 +1,37 @@
+auth_enabled: true
+
+server:
+  http_listen_port: 3100  # Port for Loki to listen on
+  log_level: info
+  auth_enabled: true  # Authentication enabled for Loki API
+
+common:
+  path_prefix: /loki  # Base directory where Loki will store its data
+  storage:
+    filesystem:  # Configure Loki to use local filesystem for storage
+      chunks_directory: /loki/chunks
+      rules_directory: /loki/rules
+  replication_factor: 1  # Each piece of data is stored once
+  ring:
+    kvstore:
+      store: inmemory  # Use in-memory key-value store for ring management (used for consistent hashing and data distribution)
+
+schema_config:  # Defines how log data is stored and indexed
+  configs:
+    - from: 2025-06-01  # Start date for this schema configuration
+      store: boltdb-shipper  # Use BoltDB Shipper for index storage
+      object_store: filesystem  # Use local filesystem for storing chunks
+      schema: v11
+      index:
+        prefix: index_  # Prefix for index files
+        period: 24h  # Indexes are created every 24 hours
+
+ruler:
+  alertmanager_url: http://localhost:9093  # URL for Alertmanager to send alerts
+
+# HTTP basic authentication config
+auth:
+  type: basic
+  basic:
+    username: ${LOKI_USER}
+    password: ${LOKI_PASSWORD}
