@@ -9,7 +9,7 @@ from src.monitoring.driving.for_registering_usage.register_usage_command import 
 )
 from src.monitoring.driving.for_registering_usage.usage_registrar import UsageRegistrar
 
-router = APIRouter(prefix="/monitoring", tags=["monitoring"])
+router = APIRouter(prefix="/monitoring", tags=["v1/monitoring"])
 
 
 class RegisterUsageRequest(BaseModel):
