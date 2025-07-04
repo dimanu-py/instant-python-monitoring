@@ -1,0 +1,29 @@
+services:
+  loki:
+    image: grafana/loki:3.4.4
+    container_name: ipy-loki
+    ports:
+      - "3100:3100"
+    volumes:
+      - ./config/loki/config.yml:/etc/loki/config.yaml
+    command: -config.file=/etc/loki/local-config.yaml
+    environment:
+      - LOKI_USER=${LOKI_USERNAME}
+      - LOKI_PASSWORD=${LOKI_PASSWORD}
+
+  grafana:
+    image: grafana/grafana:12.0.2
+    container_name: ipy-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=${GRAFANA_USERNAME}
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+      - LOKI_USER=${LOKI_USERNAME}
+      - LOKI_PASSWORD=${LOKI_PASSWORD}
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./config/grafana/provisioning:/etc/grafana/provisioning
+
+volumes:
+  grafana-storage:
