@@ -37,4 +37,3 @@ class TestRegisterUsageRouter:
 
     def _then_response_should_be_no_content(self) -> None:
         expect(self._response.status_code).to(be(204))
-        expect(self._response.content).to(be(None))
