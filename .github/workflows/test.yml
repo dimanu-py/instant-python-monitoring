@@ -27,4 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: ./.github/actions/python_setup
-      - run: make acceptance
+      - run: |
+          docker compose up -d loki
+          make acceptance
+          docker compose down -v
