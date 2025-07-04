@@ -8,8 +8,9 @@ from src.monitoring.usage.usage_information import UsageInformation
 
 
 class LokiClient(ForSendingUsage):
-    def __init__(self, url: str) -> None:
+    def __init__(self, url: str, username: str = None, password: str = None) -> None:
         self._push_endpoint = f"{url}/loki/api/v1/push"
+        self._auth = (username, password) if username and password else None
 
     def send_information(self, info: UsageInformation) -> None:
         current_time_ns = int(time.time_ns())
@@ -31,6 +32,7 @@ class LokiClient(ForSendingUsage):
             self._push_endpoint,
             json=payload,
             headers={"Content-Type": "application/json"},
+            auth=self._auth,
         )
 
         if response.status_code != 204:
